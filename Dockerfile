@@ -9,6 +9,12 @@ RUN apt install -y squashfs-tools squashfuse git python-setuptools pkgconf clang
 RUN apt install -y binfmt-support systemd cmake ninja-build software-properties-common
 RUN apt install -y libncurses6 libncurses5 libtinfo5 libtinfo6 libncurses-dev
 RUN apt install -y libsdl2-dev libepoxy-dev libssl-dev llvm lld
+# Dependencies for Qt
+RUN apt-get update && apt-get install -y \
+    qtbase5-dev \
+    qttools5-dev \
+    qttools5-dev-tools \
+    qtdeclarative5-dev
 
 # compiling FEX
 RUN add-apt-repository -y ppa:fex-emu/fex
@@ -25,6 +31,7 @@ RUN ninja binfmt_misc_64
 
 # Create user steam
 RUN useradd -m steam
+
 
 # InstallL FEX root FS
 RUN sudo -u steam bash -c "unbuffer FEXRootFSFetcher -y -x"
