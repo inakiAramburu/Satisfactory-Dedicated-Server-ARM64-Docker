@@ -31,6 +31,9 @@ RUN ninja binfmt_misc_64
 
 # Create user steam
 RUN useradd -m steam
+#owner fix
+RUN mkdir /home/steam/.config/
+RUN chown -R steam:steam /home/steam/.config/
 
 
 # InstallL FEX root FS
